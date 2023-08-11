@@ -49,6 +49,12 @@ Route::get('/listing/{id}', function ($id) {
     }
 }); 
 
+Route::get('/listing/{listing}', function (Listing $listing) { // eloquent route model binding 1:28:00
+    return view('listing', [
+        'listing' => $listing
+    ]);
+}); 
+
 
 /* !!!!!!!! Estudio
 Route::get('/hello', function() {
