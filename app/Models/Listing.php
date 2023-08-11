@@ -9,6 +9,9 @@ class Listing extends Model // It extends from Eloquent Model so i can use lots 
 {
     use HasFactory;
 
+    
+    protected $fillable = ['title', 'tags', 'company', 'location', 'website', 'email', 'description']; // adding fillable for mass assignment
+
     public function scopeFilter($query, array $filters){ // creating a method called scopeFilter in our Model, it will have a $query and and array of filters. // !!!! with this we can now filter in our Listing Model
         //dd($filters['tag']); // esto nos da el tag que seleccionemos
         if($filters['tag'] ?? false){ // if $filters['tag'] is not false...

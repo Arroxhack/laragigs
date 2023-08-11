@@ -34,6 +34,14 @@ use App\Models\Listing; // we bring our Model
 Route::get('/', [ListingController::class, 'index']);  // we want the / to go to the Listing controller (traer el modelo, se hace auto pero por las dudas) and the index method
     
 
+
+// Show Create form
+Route::get('/listings/create', [ListingController::class, 'create']);
+
+// Store Listing Data
+Route::post('/listings', [ListingController::class, 'store']);
+
+
+
 // Creating a new Route called single listing
 Route::get('/listing/{listing}', [ListingController::class, 'show']); 
-
