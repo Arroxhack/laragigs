@@ -19,6 +19,10 @@
         @endunless
         
     </div>
+
+    <div class="mt-6 p-4"> {{-- Pagination !!!! --}}
+        {{$listings->links()}} {{-- No se para que usa la funcion links(), ya poniendo solo $listings funciona --}}
+    </div>
     
 </x-layout>
     

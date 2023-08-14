@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('FILESYSTEM_DISK', 'local'),
+    'default' => env('FILESYSTEM_DISK', 'public'), // changing local to public for the images to be public
 
     /*
     |--------------------------------------------------------------------------

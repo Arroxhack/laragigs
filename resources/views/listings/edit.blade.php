@@ -3,15 +3,15 @@
 
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
-                Create a Gig
+                Edit Gig
             </h2>
-            <p class="mb-4">Post a gig to find a developer</p>
+            <p class="mb-4">Edit: {{$listing->title}}</p>
         </header>
 
-        <form action="/laragigs/public/listings" method="POST" enctype="multipart/form-data"> {{-- enctype attribute to use an input type file (for the logo) --}}
+        <form action="/laragigs/public/listings/{{$listing->id}}" method="POST" enctype="multipart/form-data"> {{-- enctype attribute to use an input type file (for the logo) --}}
             {{-- @csrf Laravel directive when having a POST method, !!!! this prevents cross site scripting attacks --}}
             @csrf
-
+            @method('PUT') {{-- Method directive to be able to use a PUT method --}}
             <div class="mb-6">
                 <label
                     for="company"
@@ -22,7 +22,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="company"
-                    value="{{old('company')}}" {{-- old helper to keep data if error in input --}}
+                    value="{{$listing->company}}" {{-- pre field inputs with de data that is already in the database --}}
                 />
 
                 @error('company') {{-- error directive passing the name of the field --}}
@@ -40,7 +40,7 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="title"
                     placeholder="Example: Senior Laravel Developer"
-                    value="{{old('title')}}" {{-- old helper to keep data if error in input --}}
+                    value="{{$listing->title}}" {{-- pre field inputs with de data that is already in the database --}}
                 />
 
                 @error('title') {{-- error directive passing the name of the field --}}
@@ -60,7 +60,7 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="location"
                     placeholder="Example: Remote, Boston MA, etc"
-                    value="{{old('location')}}" {{-- old helper to keep data if error in input --}}
+                    value="{{$listing->location}}" {{-- pre field inputs with de data that is already in the database --}}
                 />
 
                 @error('location') {{-- error directive passing the name of the field --}}
@@ -77,7 +77,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="email"
-                    value="{{old('email')}}" {{-- old helper to keep data if error in input --}}
+                    value="{{$listing->email}}" {{-- pre field inputs with de data that is already in the database --}}
                 />
 
                 @error('email') {{-- error directive passing the name of the field --}}
@@ -97,7 +97,7 @@
                     type="text"
                     class="border border-gray-200 rounded p-2 w-full"
                     name="website"
-                    value="{{old('website')}}" {{-- old helper to keep data if error in input --}}
+                    value="{{$listing->website}}" {{-- pre field inputs with de data that is already in the database --}}
                 />
 
                 @error('website') {{-- error directive passing the name of the field --}}
@@ -115,7 +115,7 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="tags"
                     placeholder="Example: Laravel, Backend, Postgres, etc"
-                    value="{{old('tags')}}" {{-- old helper to keep data if error in input --}}
+                    value="{{$listing->tags}}" {{-- pre field inputs with de data that is already in the database --}}
                 />
 
                 @error('tags') {{-- error directive passing the name of the field --}}
@@ -132,6 +132,12 @@
                     type="file" {{-- !!!!!!!! IMPORTANT --}}
                     class="border border-gray-200 rounded p-2 w-full"
                     name="logo"
+                />
+
+                <img
+                class="w-48 mr-6 mb-6"
+                src="{{$listing-> logo ? asset('storage/' . $listing->logo) : asset('/images/no-image.png')}}"
+                alt=""
                 />
 
                 @error('logo') 
@@ -151,8 +157,8 @@
                     class="border border-gray-200 rounded p-2 w-full"
                     name="description"
                     rows="10"
-                    placeholder="Include tasks, requirements, salary, etc"
-                >{{old('description')}} {{-- !!!! different because its a text area old helper to keep data if error in input --}}
+                    placeholder="Include tasks, requirements, salary, etc">
+                    {{$listing->company}} {{-- pre field inputs with de data that is already in the database --}}
                 </textarea>
 
                 @error('description') {{-- error directive passing the name of the field --}}
@@ -163,7 +169,7 @@
 
             <div class="mb-6">
                 <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                    Create Gig
+                    Update Gig
                 </button>
 
                 <a href="/" class="bg-black text-white rounded py-2 px-4 hover:bg-gray-400"> Back </a>
