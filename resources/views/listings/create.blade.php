@@ -25,7 +25,7 @@
                     value="{{old('company')}}" {{-- old helper to keep data if error in input --}}
                 />
 
-                @error('company') {{-- error directive passing the name of the field --}}
+                @error('company') {{-- error directive passing the value of the name attribute --}}
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>{{-- do something if this fails --}}
                 @enderror
 
